@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    font-size: 15px; /* 將字體大小設置為20px */
+}
+
+.container {
+    width: 500px; /* 調整容器寬度為400px */
+    height: 400px; /* 調整容器寬度為400px */
+    margin: 10px auto 20px; /* 設置上邊距為80px，下邊距為20px，水平置中 */
+    background-color: #fff;
+    padding: 30px; /* 調整填充 */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 16px; /* 增加填充 */
+    margin-bottom: 16px; /* 增加間距 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 16px; /* 增加填充 */
+    font-size: 20px; /* 將按鈕文字大小設置為20px */
+    background-color: #cf712a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#message {
+    margin-top: 16px; /* 增加間距 */
+    text-align: center;
+    color: #ff7700;
+    font-weight: bold;
+}
+
+.links {
+    text-align: center;
+    margin-top: 16px; /* 增加間距 */
+}
+
+.links a {
+    margin: 0 10px; /* 調整連結間距 */
+}
+
+
+.logo {
+    max-width: 400px; /* 設置最大寬度為200px */
+    max-height: 150px; /* 設置最大高度為100px */
+}
+
+.header {
+    text-align: center;
+}
