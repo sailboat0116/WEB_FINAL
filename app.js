@@ -28,16 +28,34 @@ var db = new sqlite3.Database(path.join(__dirname, 'db', 'sqlite.db'), (err) => 
 
 app.post('/api/register', (req, res) => {
     let { account, password } = req.body; // 從請求body中提取帳號和密碼
-    let sql = 'INSERT INTO account_password (account, password) VALUES (?, ?)';
-    db.run(sql, [account, password], (err) => {
+
+    // 先檢查是否已有相同的帳號
+    let checkSql = 'SELECT account FROM account_password WHERE account = ?';
+    db.get(checkSql, [account], (err, row) => {
         if (err) {
             console.error(err.message);
             res.status(500).send('Internal Server Error');
             return;
         }
-        res.send('帳號創建成功');
+
+        if (row) {
+            // 如果帳號已存在
+            res.send('已有帳號囉');
+        } else {
+            // 如果帳號不存在，插入新帳號
+            let insertSql = 'INSERT INTO account_password (account, password) VALUES (?, ?)';
+            db.run(insertSql, [account, password], (err) => {
+                if (err) {
+                    console.error(err.message);
+                    res.status(500).send('Internal Server Error');
+                    return;
+                }
+                res.send('帳號創建成功');
+            });
+        }
     });
 });
+
 
 
 
@@ -56,5 +74,21 @@ app.post('/api/login', (req, res) => {
         }
     });
 });
+
+app.post('/api/forget', (req, res) => {
+    let { account } = req.body;
+    let sql = 'SELECT password FROM account_password WHERE account = ?';
+    db.get(sql, [account], (err, row) => {
+        if (err) {
+            return res.status(500).send({ message: '資料庫錯誤' });
+        }
+        if (row) {
+            res.send({ success: true, password: row.password });
+        } else {
+            res.send({ success: false, message: '沒有這個帳號唷' });
+        }
+    });
+});
+
 
 module.exports = app;
